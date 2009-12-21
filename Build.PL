@@ -16,6 +16,11 @@ my $builder = Module::Build->new(
         'CPAN::Mini::Inject' => 0,
         'CGI::Application::Dispatch' => 0,
     },
+    recommends => {
+        'Getopt::Long' => 0,
+        'Pod::Usage' => 0,
+        'CGI::Application::Dispatch::Server' => 0,
+    },
     add_to_cleanup      => [ 'CPAN-Mini-Inject-Server-*' ],
     create_makefile_pl => 'traditional',
 );

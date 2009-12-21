@@ -12,7 +12,9 @@ WriteMakefile
                            'Test::More' => '0'
                          },
           'INSTALLDIRS' => 'site',
-          'EXE_FILES' => [],
+          'EXE_FILES' => [
+                           'bin/cmis_test_server.pl'
+                         ],
           'PL_FILES' => {}
         )
 ;

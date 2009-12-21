@@ -14,6 +14,10 @@ requires:
   CGI::Application::Dispatch: 0
   CGI::Application::Plugin::AutoRunmode: 0
   CPAN::Mini::Inject: 0
+recommends:
+  CGI::Application::Dispatch::Server: 0
+  Getopt::Long: 0
+  Pod::Usage: 0
 configure_requires:
   Module::Build: 0.35
 provides:
