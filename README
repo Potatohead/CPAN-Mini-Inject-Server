@@ -1,17 +1,13 @@
 CPAN-Mini-Inject-Server
 
-Doccing it later, sue me.
-The README is used to introduce the module and provide instructions on
-how to install the module, any machine dependencies it may have (for
-example C compilers and installed libraries) and any other information
-that should be provided before the module is installed.
+This module is a simple Restish webservice that makes the basic functionality
+and interface of mcpani (of the CPAN::Mini::Inject package) available from
+accross a network allowing for remote management of a cpan mirror.
 
-A README file is required for CPAN modules since CPAN extracts the README
-file from a module distribution so that people browsing the archive
-can use it to get an idea of the module's uses. It is usually a good idea
-to provide version information here so that people can decide whether
-fixes for the module are worth downloading.
-
+The original envisaged use for this module was for a continuous integration
+platform with distributed build nodes to be able to commit its build artifacts
+back to a common CPAN repository so that subsequent builds of other modules
+could use source the new version of the software.
 
 INSTALLATION
 
@@ -21,6 +17,34 @@ To install this module, run the following commands:
 	./Build
 	./Build test
 	./Build install
+
+After the libraries are installed the service must be set up on some form of web
+server.
+
+You can use a test server (set up in cmis_test_server.pl)
+
+    use CGI::Application::Dispatch::Server;
+    my $server = CGI::Application::Dispatch::Server->new(
+        class => 'CPAN::Mini::Inject::Server::Dispatch',
+        port => '9000'
+    );
+
+    $server->run;
+
+Or plain CGI can be used
+
+    #!/usr/bin/perl
+    use FindBin '$Bin';
+    use lib "$Bin/../../rel/path/to/my/perllib";
+    use CPAN::Mini::Inject::Server::Dispatch
+    CPAN::Mini::Inject::Server::Dispatch->dispatch();
+
+Or preferably Apache and mod_perl
+
+    <location /app>
+        SetHandler perl-script
+        PerlHandler CPAN::Mini::Inject::Server::Dispatch
+    </location>
 
 SUPPORT AND DOCUMENTATION
 

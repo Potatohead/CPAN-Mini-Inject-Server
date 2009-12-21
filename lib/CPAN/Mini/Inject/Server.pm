@@ -9,7 +9,7 @@ use CPAN::Mini::Inject;
 
 =head1 NAME
 
-CPAN::Mini::Inject::Server - module catchphrase
+CPAN::Mini::Inject::Server - Inject into your cpan mirror from over there 
 
 =head1 VERSION
 
@@ -22,11 +22,43 @@ our $VERSION = '0.01';
 
 =head1 SYNOPSIS
 
-describe the module, working code example
+#under test server
+
+use CGI::Application::Dispatch::Server;
+my $server = CGI::Application::Dispatch::Server->new(
+    class => 'CPAN::Mini::Inject::Server::Dispatch',
+    port => '9000'
+);
+
+$server->run;
+
+#under plain cgi
+
+#!/usr/bin/perl
+use FindBin '$Bin';
+use lib "$Bin/../../rel/path/to/my/perllib";
+use CPAN::Mini::Inject::Server::Dispatch
+CPAN::Mini::Inject::Server::Dispatch->dispatch();
+
+#Apache and mod perl
+
+<location /app>
+    SetHandler perl-script
+    PerlHandler CPAN::Mini::Inject::Server::Dispatch
+</location>
 
 =cut
 
 =head1 DESCRIPTION
+
+This module is a simple Restish webservice that makes the basic functionality
+and interface of mcpani (of the CPAN::Mini::Inject package) available from
+accross a network allowing for remote management of a cpan mirror.
+
+The original envisaged use for this module was for a continuous integration
+platform with distributed build nodes to be able to commit its build artifacts
+back to a common CPAN repository so that subsequent builds of other modules
+could use source the new version of the software.
 
 =cut
 
