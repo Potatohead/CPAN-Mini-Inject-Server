@@ -1,0 +1,29 @@
+---
+name: CPAN-Mini-Inject-Server
+version: 0.01
+author:
+  - 'Christopher Mckay <potatohead@potatolan.com>'
+abstract: module catchphrase
+license: perl
+resources:
+  license: http://dev.perl.org/licenses/
+build_requires:
+  Test::More: 0
+requires:
+  CGI::Application: 0
+  CGI::Application::Dispatch: 0
+  CGI::Application::Plugin::AutoRunmode: 0
+  CPAN::Mini::Inject: 0
+configure_requires:
+  Module::Build: 0.35
+provides:
+  CPAN::Mini::Inject::Server:
+    file: lib/CPAN/Mini/Inject/Server.pm
+    version: 0.01
+  CPAN::Mini::Inject::Server::Dispatch:
+    file: lib/CPAN/Mini/Inject/Server/Dispatch.pm
+    version: 0.01
+generated_by: Module::Build version 0.35
+meta-spec:
+  url: http://module-build.sourceforge.net/META-spec-v1.4.html
+  version: 1.4
