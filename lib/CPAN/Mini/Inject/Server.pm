@@ -198,8 +198,9 @@ Please report any bugs or feature requests to C<bug-cpan-mini-inject-server at r
 the web interface at L<http://rt.cpan.org/NoAuth/ReportBug.html?Queue=CPAN-Mini-Inject-Server>.  I will be notified, and then you'll
 automatically be notified of progress on your bug as I make changes.
 
+=head1 TO DO
 
-
+Need to add logging down to trace levels to this
 
 =head1 SUPPORT
 
