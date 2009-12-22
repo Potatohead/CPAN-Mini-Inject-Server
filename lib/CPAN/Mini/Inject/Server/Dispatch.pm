@@ -66,11 +66,10 @@ Dispatch urls for CPAN::Mini::Inject::Server
 sub dispatch_args {
     return {
         prefix => 'CPAN::Mini::Inject',
-        default => 'Server',
         table => [
-            'add[put]' => {rm => 'add'},
-            'update[post]' => {rm => 'update'},
-            'inject[post]' => {rm => 'inject'},
+            'add[post]' => {app => 'Server', rm => 'add'},
+            'update[post]' => {app => 'Server', rm => 'update'},
+            'inject[post]' => {app => 'Server', rm => 'inject'},
         ],
     }
 } # end of subroutine dispatch_args

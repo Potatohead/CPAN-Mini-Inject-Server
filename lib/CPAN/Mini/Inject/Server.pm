@@ -9,7 +9,7 @@ use CPAN::Mini::Inject;
 
 =head1 NAME
 
-CPAN::Mini::Inject::Server - Inject into your cpan mirror from over there 
+CPAN::Mini::Inject::Server - Inject into your CPAN mirror from over there 
 
 =head1 VERSION
 
@@ -81,7 +81,7 @@ sub _mcpi {
     if (not $self->{mcpi})
     {
         $self->{mcpi} = CPAN::Mini::Inject->new;
-        $self->{mcpi}->load_config();
+        $self->{mcpi}->loadcfg();
         $self->{mcpi}->parsecfg();
     }
 
@@ -102,8 +102,8 @@ sub add :Runmode {
     my $query = $self->query();
 
     my $module_name = $query->param('module');
-    my $module_author = $query->params('authorid');
-    my $module_version = $query->params('version');
+    my $module_author = $query->param('authorid');
+    my $module_version = $query->param('version');
 
     my $module_filename = $query->param('file');
 
@@ -114,10 +114,6 @@ sub add :Runmode {
     }
 
     # check filename ends with tar.gz
-
-    my $module_filetype = $query->uploadInfo($module_filename)->{'Content-Type'};
-
-    # check filetype matches a targz
 
     my $bytesread;
     my $tmp_fh;
@@ -166,7 +162,7 @@ sub update :Runmode {
 
     my $mcpi = $self->_mcpi();
 
-    $mcpi->update_mirror({});
+    $mcpi->update_mirror();
     $mcpi->inject();
 
     $self->header_add(-status => '202 Mirror updated');
@@ -180,7 +176,7 @@ Injects all added modules into the cpan mirror
 
 =cut
 
-sub inject {
+sub inject :Runmode {
     my $self = shift;
 
     my $mcpi = $self->_mcpi();
