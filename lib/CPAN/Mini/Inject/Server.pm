@@ -121,7 +121,11 @@ sub add :Runmode {
     # -e tmp file here to check we don't bash on it can be racey, just forget
     # about it
 
-    if (not open ($tmp_fh, '>', "/tmp/$module_name-$module_version.tar.gz"))
+    my $tmp_module_filename = $module_name;
+    $tmp_module_filename =~ s/::/-/g;
+    $tmp_module_filename = "/tmp/$tmp_module_filename-$module_version.tar.gz";
+
+    if (not open ($tmp_fh, '>', $tmp_module_filename))
     {
         $self->header_add(-status => '500 Internal System Error');
         return;
@@ -134,18 +138,16 @@ sub add :Runmode {
 
     close ($tmp_fh);
 
-    my $module_file_name = $module_name;
-    $module_file_name =~ s/::/-/g;
 
     my $mcpi = $self->_mcpi();
     $mcpi->add(
         module => $module_name,
         authorid => $module_author,
         version => $module_version,
-        file => "/tmp/$module_name-$module_version.tar.gz",
+        file => $tmp_module_filename,
     );
 
-    unlink "/tmp/$module_name-$module_version.tar.gz";
+    unlink $tmp_module_filename;
 
     $mcpi->writelist();
 
