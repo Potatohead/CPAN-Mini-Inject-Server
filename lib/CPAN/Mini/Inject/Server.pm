@@ -13,11 +13,11 @@ CPAN::Mini::Inject::Server - Inject into your CPAN mirror from over there
 
 =head1 VERSION
 
-Version 0.01
+Version 0.02
 
 =cut
 
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 
 
 =head1 SYNOPSIS
@@ -133,6 +133,9 @@ sub add :Runmode {
     }
 
     close ($tmp_fh);
+
+    my $module_file_name = $module_name;
+    $module_file_name =~ s/::/-/g;
 
     my $mcpi = $self->_mcpi();
     $mcpi->add(
