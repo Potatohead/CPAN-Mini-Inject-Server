@@ -5,7 +5,7 @@ use warnings;
 
 =head1 NAME
 
-cmis_test_server.pl - short desc
+cmis_test_server.pl - Standalone server for CPAN::Mini::Inject::Server
 
 =head1 SYNOPSIS
 
@@ -42,11 +42,11 @@ Test dev server for CPAN::Mini::Inject::Server
 
 =head1 VERSION
 
-Version 0.01
+Version 0.03
 
 =cut
 
-our $VERSION = '0.01';
+our $VERSION = '0.03';
 
 use Carp;
 use Getopt::Long;

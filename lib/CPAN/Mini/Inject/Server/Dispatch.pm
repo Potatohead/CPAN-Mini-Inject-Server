@@ -6,15 +6,15 @@ use base 'CGI::Application::Dispatch';
 
 =head1 NAME
 
-CPAN::Mini::Inject::Server::Dispatch - module catchphrase
+CPAN::Mini::Inject::Server::Dispatch - Dispatch table for CPAN::Mini::Inject::Server
 
 =head1 VERSION
 
-Version 0.02
+Version 0.03
 
 =cut
 
-our $VERSION = '0.02';
+our $VERSION = '0.03';
 
 
 =head1 SYNOPSIS

@@ -6,6 +6,8 @@ lib/CPAN/Mini/Inject/Server.pm
 lib/CPAN/Mini/Inject/Server/Dispatch.pm
 Makefile.PL
 MANIFEST
+MANIFEST.bak
+MANIFEST.SKIP
 META.yml
 README
 t/00-load.t
